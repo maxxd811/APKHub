@@ -127,19 +127,17 @@
     }
 
     .info {
-      margin-top: 40px;
+      margin: 40px auto;
       padding: 20px;
       background: #111;
-      border-top: 1px solid #333;
+      border-radius: 20px;
+      max-width: 700px;
+      width: 90%;
       text-align: left;
 
       opacity: 0;
       animation: fadeIn 1s ease forwards;
       animation-delay: 1.5s;
-    }
-
-    .info h2 {
-      margin-top: 0;
     }
 
     .info p {
@@ -148,15 +146,23 @@
     }
 
     .contact {
-      margin-top: 40px;
+      margin: 40px auto;
       padding: 20px;
       background: #111;
-      border-top: 1px solid #333;
+      border-radius: 20px;
+      max-width: 400px;
+      width: 90%;
+      box-shadow: 0 0 20px rgba(255,255,255,0.05);
+
+      opacity: 0;
+      animation: fadeIn 1s ease forwards;
+      animation-delay: 1.7s;
     }
 
     .contact input,
     .contact textarea {
       width: 100%;
+      box-sizing: border-box;
       margin-top: 10px;
       padding: 10px;
       border-radius: 10px;
@@ -197,9 +203,7 @@
 
   <canvas id="stars"></canvas>
 
-  <div id="loader">
-    Cargando...
-  </div>
+  <div id="loader">Cargando...</div>
 
   <audio id="clickSound" src="Archivos/Audios/Click.mp3" preload="auto"></audio>
 
@@ -219,16 +223,14 @@
     </a>
   </div>
 
-  <div class="version">
-    Versión: v2.0
-  </div>
+  <div class="version">Versión: v2.0</div>
 
   <div class="alt-text">
     ¿No quieres instalar nada? pues úsalo online!
   </div>
 
   <p style="margin-top:20px; font-size:12px;">
-    ⚠️ Activa "Descargar apps de sitios desconocidos" para instalar
+    ⚠️ Activa "Descargar apps de sitios desconocidos" para instalarlo
   </p>
 
   <div class="info">
@@ -240,13 +242,13 @@
     <h2>✨ Características</h2>
     <p>
       - Muchos juegos y apps disponibles<br>
-      - Interfaz simple y rápida<br>
+      - Interfaz simple y rápida
     </p>
 
     <h2>🆕 Actualizaciónes</h2>
     <p>
       - Cambio de Icono y nombre<br>
-      - Problema de instalacion de Happy Mod Arreglado<br>
+      - Problema de instalacion de Happy Mod Arreglado
     </p>
   </div>
 
@@ -264,18 +266,20 @@
   </div>
 
   <script>
-    window.addEventListener("load", function() {
+    window.addEventListener("load", () => {
       document.getElementById("loader").style.display = "none";
     });
 
     const canvas = document.getElementById("stars");
     const ctx = canvas.getContext("2d");
 
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
 
     let stars = [];
-
     for (let i = 0; i < 100; i++) {
       stars.push({
         x: Math.random() * canvas.width,
@@ -295,7 +299,6 @@
           star.y = 0;
           star.x = Math.random() * canvas.width;
         }
-
         ctx.beginPath();
         ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
         ctx.fill();
@@ -303,13 +306,9 @@
 
       requestAnimationFrame(animate);
     }
-
     animate();
 
-    window.addEventListener("resize", () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    });
+    window.addEventListener("resize", resizeCanvas);
 
     const clickSound = document.getElementById("clickSound");
     let lastClickTime = 0;
@@ -327,7 +326,7 @@
     const statusMsg = document.getElementById("statusMsg");
     const btn = document.getElementById("sendBtn");
 
-    form.addEventListener("submit", async function(e) {
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
 
       btn.classList.add("sending");
@@ -346,16 +345,15 @@
 
         if (res.ok) {
           statusMsg.style.color = "#00ff99";
-          statusMsg.innerText = "✅ Mensaje enviado";
+          statusMsg.innerText = "Mensaje enviado";
           form.reset();
         } else {
           statusMsg.style.color = "red";
-          statusMsg.innerText = "❌ Error al enviar";
+          statusMsg.innerText = "Error al enviar";
         }
-
       } catch {
         statusMsg.style.color = "red";
-        statusMsg.innerText = "❌ Error de conexión";
+        statusMsg.innerText = "Error de conexión";
       }
 
       btn.classList.remove("sending");
