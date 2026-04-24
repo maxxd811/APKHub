@@ -1,204 +1,260 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Apk Hub</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
+<!DOCTYPE html>  
+<html>  
+<head>  
+  <title>Apk Hub</title>  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+  <style>  
 
-    #loader {
+    canvas {
       position: fixed;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
-      background: #000;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-      color: white;
-      font-size: 20px;
+      z-index: -1;
     }
 
-    body {
-      background: #000;
-      color: white;
-      text-align: center;
-      font-family: Arial;
-      margin: 0;
+    #loader {  
+      position: fixed;  
+      width: 100%;  
+      height: 100%;  
+      background: #000;  
+      display: flex;  
+      justify-content: center;  
+      align-items: center;  
+      z-index: 9999;  
+      color: white;  
+      font-size: 20px;  
+    }  
 
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeIn 0.8s ease forwards;
-      animation-delay: 0.3s;
-    }
+    body {  
+      background: #000;  
+      color: white;  
+      text-align: center;  
+      font-family: Arial;  
+      margin: 0;  
 
-    @keyframes fadeIn {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+      opacity: 0;  
+      transform: translateY(20px);  
+      animation: fadeIn 0.8s ease forwards;  
+      animation-delay: 0.3s;  
+    }  
 
-    .app-img {
-      width: 120px;
-      border-radius: 25px;
-      margin-top: 40px;
-      box-shadow: 0 5px 20px rgba(255,255,255,0.2);
+    @keyframes fadeIn {  
+      to {  
+        opacity: 1;  
+        transform: translateY(0);  
+      }  
+    }  
 
-      opacity: 0;
-      animation: fadeIn 1s ease forwards;
-      animation-delay: 0.4s;
-    }
+    .app-img {  
+      width: 120px;  
+      border-radius: 25px;  
+      margin-top: 40px;  
+      box-shadow: 0 5px 20px rgba(255,255,255,0.2);  
 
-    h1 {
-      margin-top: 15px;
+      opacity: 0;  
+      animation: fadeIn 1s ease forwards;  
+      animation-delay: 0.4s;  
+    }  
 
-      opacity: 0;
-      animation: fadeIn 1s ease forwards;
-      animation-delay: 0.6s;
-    }
+    h1 {  
+      margin-top: 15px;  
 
-    .buttons {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      flex-wrap: wrap;
-      margin-top: 20px;
+      opacity: 0;  
+      animation: fadeIn 1s ease forwards;  
+      animation-delay: 0.6s;  
+    }  
 
-      opacity: 0;
-      animation: fadeIn 1s ease forwards;
-      animation-delay: 0.8s;
-    }
+    .buttons {  
+      display: flex;  
+      justify-content: center;  
+      gap: 15px;  
+      flex-wrap: wrap;  
+      margin-top: 20px;  
 
-    .btn {
-      padding: 15px 30px;
-      border-radius: 30px;
-      text-decoration: none;
-      font-size: 18px;
-      transition: all 0.2s ease;
-    }
+      opacity: 0;  
+      animation: fadeIn 1s ease forwards;  
+      animation-delay: 0.8s;  
+    }  
 
-    .download {
-      background: white;
-      color: black;
-      box-shadow: 0 5px 15px rgba(255,255,255,0.2);
-    }
+    .btn {  
+      padding: 15px 30px;  
+      border-radius: 30px;  
+      text-decoration: none;  
+      font-size: 18px;  
+      transition: all 0.2s ease;  
+    }  
 
-    .web-btn {
-      background: transparent;
-      color: white;
-      border: 2px solid white;
-    }
+    .download {  
+      background: white;  
+      color: black;  
+      box-shadow: 0 5px 15px rgba(255,255,255,0.2);  
+    }  
 
-    .btn:hover {
-      transform: scale(1.05);
-    }
+    .web-btn {  
+      background: transparent;  
+      color: white;  
+      border: 2px solid white;  
+    }  
 
-    .btn:active {
-      transform: scale(0.95);
-    }
+    .btn:hover {  
+      transform: scale(1.05);  
+    }  
 
-    .version {
-      margin-top: 10px;
-      font-size: 14px;
-      color: #aaa;
+    .btn:active {  
+      transform: scale(0.95);  
+    }  
 
-      opacity: 0;
-      animation: fadeIn 1s ease forwards;
-      animation-delay: 1s;
-    }
+    .version {  
+      margin-top: 10px;  
+      font-size: 14px;  
+      color: #aaa;  
 
-    .alt-text {
-      margin-top: 25px;
-      font-size: 14px;
-      color: #ccc;
+      opacity: 0;  
+      animation: fadeIn 1s ease forwards;  
+      animation-delay: 1s;  
+    }  
 
-      opacity: 0;
-      animation: fadeIn 1s ease forwards;
-      animation-delay: 1.2s;
-    }
+    .alt-text {  
+      margin-top: 25px;  
+      font-size: 14px;  
+      color: #ccc;  
 
-    .info {
-      margin-top: 40px;
-      padding: 20px;
-      background: #111;
-      border-top: 1px solid #333;
-      text-align: left;
+      opacity: 0;  
+      animation: fadeIn 1s ease forwards;  
+      animation-delay: 1.2s;  
+    }  
 
-      opacity: 0;
-      animation: fadeIn 1s ease forwards;
-      animation-delay: 1.5s;
-    }
+    .info {  
+      margin-top: 40px;  
+      padding: 20px;  
+      background: #111;  
+      border-top: 1px solid #333;  
+      text-align: left;  
 
-    .info h2 {
-      margin-top: 0;
-    }
+      opacity: 0;  
+      animation: fadeIn 1s ease forwards;  
+      animation-delay: 1.5s;  
+    }  
 
-    .info p {
-      color: #ccc;
-      line-height: 1.5;
-    }
+    .info h2 {  
+      margin-top: 0;  
+    }  
 
-  </style>
-</head>
-<body>
+    .info p {  
+      color: #ccc;  
+      line-height: 1.5;  
+    }  
 
-  <div id="loader">
-    Cargando...
-  </div>
+  </style>  
+</head>  
+<body>  
+
+  <canvas id="stars"></canvas>
+
+  <div id="loader">  
+    Cargando...  
+  </div>  
+    
+  <img class="app-img" src="Archivos/imagenes/Icon.png">  
   
-  <img class="app-img" src="Archivos/imagenes/Icon.png">
+  <h1>✨ APKHub ✨</h1>  
+  
+  <p>última versión aquí:</p>  
+  
+  <div class="buttons">  
+    <a class="btn download" href="Archivos/APK/APKHub v2.0.apk" download>  
+      Descargar  
+    </a>  
 
-  <h1>✨ APKHub ✨</h1>
+    <a class="btn web-btn" href="https://bio.link/apkhubb" target="_blank">  
+      Online 🌐  
+    </a>  
+  </div>  
 
-  <p>última versión aquí:</p>
+  <div class="version">  
+    Versión: v2.0  
+  </div>  
 
-  <div class="buttons">
-    <a class="btn download" href="Archivos/APK/APKHub v2.0.apk" download>
-      Descargar
-    </a>
+  <div class="alt-text">  
+    ¿No quieres instalar nada? pues úsalo online!  
+  </div>  
 
-    <a class="btn web-btn" href="https://bio.link/apkhubb" target="_blank">
-      Online 🌐
-    </a>
-  </div>
+  <p style="margin-top:20px; font-size:12px;">  
+    ⚠️ Activa "Descargar apps de sitios desconocidos" para instalar  
+  </p>  
 
-  <div class="version">
-    Versión: v2.0
-  </div>
+  <div class="info">  
+    <h2>📱 Sobre la app</h2>  
+    <p>  
+      APKHub es una sitio y app donde podrás encontrar distintos juegos e apps y poder instalarlos gratis de forma totalmente seguro y podrás pedir que añadamos cualquier juego o app.  
+    </p>  
 
-  <div class="alt-text">
-    ¿No quieres instalar nada? pues úsalo online!
-  </div>
+    <h2>✨ Características</h2>  
+    <p>  
+      - Muchos juegos y apps disponibles<br>  
+      - Interfaz simple y rápida<br>  
+    <br>  
+    </p>  
 
-  <p style="margin-top:20px; font-size:12px;">
-    ⚠️ Activa "Descargar apps de sitios desconocidos" para instalarlo
-  </p>
+    <h2>🆕 Actualizaciónes</h2>  
+    <p>  
+      - Cambio de Icono y nombre<br>  
+      - Problema de instalacion de Happy Mod Arreglado<br>  
+    </p>  
+  </div>  
 
-  <div class="info">
-    <h2>📱 Sobre la app</h2>
-    <p>
-      APKHub es una sitio y app donde podrás encontrar distintos juegos e apps y poder instalarlos gratis de forma totalmente seguro y podrás pedir que añadamos cualquier juego o app.
-    </p>
-
-    <h2>✨ Características</h2>
-    <p>
-      - Muchos juegos y apps disponibles<br>
-      - Interfaz simple y rápida<br>
-    <br>
-    </p>
-
-    <h2>🆕 Actualizaciónes</h2>
-    <p>
-      - Cambio de Icono y mombre<br>
-      - Problema de instalacion de Happy Mod Arreglado<br>
-    </p>
-  </div>
-
-  <script>
-    window.addEventListener("load", function() {
-      document.getElementById("loader").style.display = "none";
+  <script>  
+    window.addEventListener("load", function() {  
+      document.getElementById("loader").style.display = "none";  
     });
-  </script>
 
-</body>
+    const canvas = document.getElementById("stars");
+    const ctx = canvas.getContext("2d");
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let stars = [];
+
+    for (let i = 0; i < 100; i++) {
+      stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 2,
+        speed: Math.random() * 0.5
+      });
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = "white";
+
+      stars.forEach(star => {
+        star.y += star.speed;
+
+        if (star.y > canvas.height) {
+          star.y = 0;
+          star.x = Math.random() * canvas.width;
+        }
+
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    window.addEventListener("resize", () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>  
+
+</body>  
 </html>
